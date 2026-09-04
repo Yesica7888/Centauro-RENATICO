@@ -7,69 +7,63 @@ TIME_STEP = int(robot.getBasicTimeStep())
 
 
 # ============================================================
-# Get robot motors
+# Get motors
 # ============================================================
-
-def get_motor(name):
-    motor = robot.getDevice(name)
-
-    if motor is None:
-        print(f"[WARNING] Motor not found: {name}")
-
-    return motor
-
-
-motors = {}
 
 motor_names = [
-    # Head
-    "HeadPan",
-    "HeadTilt",
-
-    # Left arm
-    "LShoulderPitch",
-    "LShoulderRoll",
-    "LElbow",
-
-    # Right arm
-    "RShoulderPitch",
-    "RShoulderRoll",
-    "RElbow",
-
-    # Left leg
-    "LHipYawPitch",
-    "LHipRoll",
-    "LHipPitch",
-    "LKneePitch",
-    "LAnklePitch",
-    "LAnkleRoll",
-
-    # Right leg
-    "RHipYawPitch",
-    "RHipRoll",
-    "RHipPitch",
-    "RKneePitch",
-    "RAnklePitch",
-    "RAnkleRoll",
+    "ShoulderR",
+    "ShoulderL",
+    "ArmUpperR",
+    "ArmUpperL",
+    "ArmLowerR",
+    "ArmLowerL",
+    "PelvYR",
+    "PelvYL",
+    "PelvR",
+    "PelvL",
+    "LegUpperR",
+    "LegUpperL",
+    "LegLowerR",
+    "LegLowerL",
+    "AnkleR",
+    "AnkleL",
+    "FootR",
+    "FootL",
+    "Neck",
+    "Head",
 ]
 
-for name in motor_names:
-    motors[name] = get_motor(name)
+motors = {
+    name: robot.getDevice(name)
+    for name in motor_names
+}
 
 
 # ============================================================
-# Utility functions
+# Get position sensors
 # ============================================================
 
-def set_position(name, degrees):
+knee_right_sensor = robot.getDevice("LegLowerRS")
+knee_left_sensor = robot.getDevice("LegLowerLS")
 
-    motor = motors.get(name)
+knee_right_sensor.enable(TIME_STEP)
+knee_left_sensor.enable(TIME_STEP)
 
-    if motor is None:
-        return
 
-    motor.setPosition(math.radians(degrees))
+# ============================================================
+# Set motor position
+# ============================================================
 
+def set_motor(name, degrees):
+
+    motors[name].setPosition(
+        math.radians(degrees)
+    )
+
+
+# ============================================================
+# Wait
+# ============================================================
 
 def wait(seconds):
 
@@ -84,170 +78,214 @@ def wait(seconds):
 
 
 # ============================================================
-# Initial standing position
+# Move to standing position
 # ============================================================
 
-def stand():
+def stand_up():
 
-    print("Standing...")
+    print("Standing up...")
 
-    positions = {
+    standing_pose = {
 
-        # Head
-        "HeadPan": 0,
-        "HeadTilt": 0,
+        # Pelvis
+        "PelvR": 0,
+        "PelvL": 0,
+
+        "PelvYR": 0,
+        "PelvYL": 0,
+
+        # Legs
+        "LegUpperR": 0,
+        "LegUpperL": 0,
+
+        "LegLowerR": 0,
+        "LegLowerL": 0,
+
+        # Ankles
+        "AnkleR": 0,
+        "AnkleL": 0,
+
+        "FootR": 0,
+        "FootL": 0,
 
         # Arms
-        "LShoulderPitch": 0,
-        "LShoulderRoll": 5,
-        "LElbow": -30,
+        "ShoulderR": 0,
+        "ShoulderL": 0,
 
-        "RShoulderPitch": 0,
-        "RShoulderRoll": -5,
-        "RElbow": 30,
+        "ArmUpperR": 0,
+        "ArmUpperL": 0,
 
-        # Left leg
-        "LHipYawPitch": 0,
-        "LHipRoll": 0,
-        "LHipPitch": 0,
-        "LKneePitch": 0,
-        "LAnklePitch": 0,
-        "LAnkleRoll": 0,
+        "ArmLowerR": 0,
+        "ArmLowerL": 0,
 
-        # Right leg
-        "RHipYawPitch": 0,
-        "RHipRoll": 0,
-        "RHipPitch": 0,
-        "RKneePitch": 0,
-        "RAnklePitch": 0,
-        "RAnkleRoll": 0,
+        # Head
+        "Neck": 0,
+        "Head": 0,
     }
 
-    for name, position in positions.items():
-        set_position(name, position)
+    for name, angle in standing_pose.items():
+
+        set_motor(name, angle)
+
+    # Give the motors time to reach the standing position
 
     wait(2.0)
 
+    return True
+
 
 # ============================================================
-# Left step
+# Move the right leg forward
 # ============================================================
 
-def step_left():
+def right_step():
 
-    print("Step LEFT")
+    print("Right step")
 
-    # Shift the body weight slightly to the left
-    set_position("LHipRoll", -3)
-    set_position("RHipRoll", -3)
+    # --------------------------------------------------------
+    # Shift the body weight to the left leg
+    # --------------------------------------------------------
 
-    set_position("LAnkleRoll", 3)
-    set_position("RAnkleRoll", 3)
+    set_motor("PelvR", -3)
+    set_motor("PelvL", -3)
 
-    wait(0.3)
+    set_motor("AnkleR", 3)
+    set_motor("AnkleL", 3)
 
-    # Slightly lift the right leg
-    set_position("RHipPitch", -8)
-    set_position("RKneePitch", 18)
-    set_position("RAnklePitch", -10)
+    wait(0.2)
 
-    wait(0.3)
 
+    # --------------------------------------------------------
+    # Bend the right knee
+    # --------------------------------------------------------
+
+    set_motor("LegLowerR", 12)
+
+    wait(0.2)
+
+
+    # --------------------------------------------------------
     # Move the right leg forward
-    set_position("RHipPitch", 10)
-    set_position("RKneePitch", 15)
-    set_position("RAnklePitch", -5)
+    # --------------------------------------------------------
+
+    set_motor("LegUpperR", 8)
+
+    set_motor("AnkleR", -5)
+
+    # Move the left arm backward
+    set_motor("ShoulderL", -8)
+
+    # Move the right arm forward
+    set_motor("ShoulderR", 8)
 
     wait(0.3)
 
-    # Place the foot back on the ground
-    set_position("RKneePitch", 0)
-    set_position("RAnklePitch", 0)
 
-    wait(0.3)
+    # --------------------------------------------------------
+    # Put the right foot on the ground
+    # --------------------------------------------------------
+
+    set_motor("LegLowerR", 0)
+
+    set_motor("LegUpperR", 0)
+
+    set_motor("AnkleR", 0)
+
+    wait(0.2)
 
 
 # ============================================================
-# Right step
+# Move the left leg forward
 # ============================================================
 
-def step_right():
+def left_step():
 
-    print("Step RIGHT")
+    print("Left step")
 
-    # Shift the body weight slightly to the right
-    set_position("LHipRoll", 3)
-    set_position("RHipRoll", 3)
+    # --------------------------------------------------------
+    # Shift the body weight to the right leg
+    # --------------------------------------------------------
 
-    set_position("LAnkleRoll", -3)
-    set_position("RAnkleRoll", -3)
+    set_motor("PelvR", 3)
+    set_motor("PelvL", 3)
 
-    wait(0.3)
+    set_motor("AnkleR", -3)
+    set_motor("AnkleL", -3)
 
-    # Slightly lift the left leg
-    set_position("LHipPitch", -8)
-    set_position("LKneePitch", 18)
-    set_position("LAnklePitch", -10)
+    wait(0.2)
 
-    wait(0.3)
 
+    # --------------------------------------------------------
+    # Bend the left knee
+    # --------------------------------------------------------
+
+    set_motor("LegLowerL", 12)
+
+    wait(0.2)
+
+
+    # --------------------------------------------------------
     # Move the left leg forward
-    set_position("LHipPitch", 10)
-    set_position("LKneePitch", 15)
-    set_position("LAnklePitch", -5)
+    # --------------------------------------------------------
+
+    set_motor("LegUpperL", 8)
+
+    set_motor("AnkleL", -5)
+
+    # Move the left arm forward
+    set_motor("ShoulderL", 8)
+
+    # Move the right arm backward
+    set_motor("ShoulderR", -8)
 
     wait(0.3)
 
-    # Place the foot back on the ground
-    set_position("LKneePitch", 0)
-    set_position("LAnklePitch", 0)
 
-    wait(0.3)
+    # --------------------------------------------------------
+    # Put the left foot on the ground
+    # --------------------------------------------------------
 
+    set_motor("LegLowerL", 0)
 
-# ============================================================
-# Arm movement
-# ============================================================
+    set_motor("LegUpperL", 0)
 
-def arms_swing(direction):
+    set_motor("AnkleL", 0)
 
-    amplitude = 10
-
-    set_position(
-        "LShoulderPitch",
-        direction * amplitude
-    )
-
-    set_position(
-        "RShoulderPitch",
-        -direction * amplitude
-    )
+    wait(0.2)
 
 
 # ============================================================
-# Main control loop
+# Main
 # ============================================================
 
-stand()
+print("Darwin-OP controller started")
 
-phase = 1
 
-print("Starting patrol movement...")
+# Initial simulation step
+
+if robot.step(TIME_STEP) == -1:
+    exit()
+
+
+# Move the robot to the initial standing position
+
+stand_up()
+
+print("Robot should now be standing")
+
+print("Starting walking loop...")
+
+
+# ============================================================
+# Walking loop
+# ============================================================
 
 while robot.step(TIME_STEP) != -1:
 
-    if phase == 1:
+    # Move right leg forward
 
-        arms_swing(1)
+    right_step()
 
-        step_left()
+    # Move left leg forward
 
-        phase = 2
-
-    else:
-
-        arms_swing(-1)
-
-        step_right()
-
-        phase = 1
+    left_step()
