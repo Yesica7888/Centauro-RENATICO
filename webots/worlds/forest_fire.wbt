@@ -7,7 +7,6 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/project
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/buildings/protos/SmallResidentialTower.proto"
-EXTERNPROTO "../protos/RadioController.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/robots/robotis/darwin-op/protos/Darwin-op.proto"
 
 DEF World WorldInfo {
@@ -19,8 +18,8 @@ DEF World WorldInfo {
   }
 }
 Viewpoint {
-  orientation 0.18294958893215352 -0.17754396465004038 -0.9669579042160529 4.648823648193513
-  position 5.521876622133625 -57.03588496284064 13.985773428224121
+  orientation -0.02320209136490134 -0.059869743541320616 0.9979365093855377 5.542471061867143
+  position -12.494296862731073 -3.8130614405788834 1.159730970471755
   near 0.2
   followType "None"
 }
@@ -46,8 +45,10 @@ DEF FlightArea Floor {
   }
 }
 Darwin-op {
-  translation 0 -14 0.344
-  controller "walk"
+  translation 0 -47 0.34
+  rotation 0 0 1 0
+  controller "darwin_patrol"
+  channel 1
 }
 DEF ForestArea Forest {
   rotation 0 0 1 -1.5707963267948966
@@ -66,27 +67,109 @@ DEF ForestArea Forest {
   maxHeight 10
   minHeight 3
 }
-Solid {
-  translation 0 5 5
-  name "ForestBB"
-  boundingObject Box {
-    size 100 90 10
-  }
-}
 StraightRoadSegment {
   translation 0 -50 0.1
   rotation 0 0 1 1.5707996938995747
   length 45
+  roadBoundingObject TRUE
 }
 DEF InitPos SquareManhole {
-  translation 0 0 11.34
+  translation 0 5 -0.02
   rotation 0 0 1 1.5708
   name "Starting point"
   size 1 1 0.05
 }
-RadioController {
-  translation 4.14588e-08 -2.5 11.37
-  rotation -0.5773509358554485 0.5773489358556708 -0.5773509358554485 -2.094395307179586
+DEF Fire1 Robot {
+  translation 4 -42 0.05
+  name "Fire1"
+  controller "fire_beacon"
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 0.55 0.05
+        emissiveColor 1 0.25 0
+        emissiveIntensity 2.5
+      }
+      geometry Cylinder {
+        height 0.5
+        radius 0.12
+      }
+    }
+    Emitter {
+      name "emitter"
+      channel 1
+      range 8
+    }
+  ]
+}
+DEF Fire2 Robot {
+  translation -3.5 -32 0.05
+  name "Fire2"
+  controller "fire_beacon"
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 0.55 0.05
+        emissiveColor 1 0.25 0
+        emissiveIntensity 2.5
+      }
+      geometry Cylinder {
+        height 0.5
+        radius 0.12
+      }
+    }
+    Emitter {
+      name "emitter"
+      channel 1
+      range 8
+    }
+  ]
+}
+DEF Fire3 Robot {
+  translation 7 -18 0.05
+  name "Fire3"
+  controller "fire_beacon"
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 0.55 0.05
+        emissiveColor 1 0.25 0
+        emissiveIntensity 2.5
+      }
+      geometry Cylinder {
+        height 0.5
+        radius 0.12
+      }
+    }
+    Emitter {
+      name "emitter"
+      channel 1
+      range 8
+    }
+  ]
+}
+DEF Fire4 Robot {
+  translation -9 4 0.05
+  name "Fire4"
+  controller "fire_beacon"
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 0.55 0.05
+        emissiveColor 1 0.25 0
+        emissiveIntensity 2.5
+      }
+      geometry Cylinder {
+        height 0.5
+        radius 0.12
+      }
+    }
+    Emitter {
+      name "emitter"
+      channel 1
+      range 8
+    }
+  ]
 }
 SmallResidentialTower {
   rotation 0 0 1 -1.5707953071795862
