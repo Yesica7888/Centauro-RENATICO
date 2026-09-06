@@ -23,6 +23,10 @@ from controller import Supervisor
 
 from walking import Walking
 
+#from views.view_people import view_people # línea nueva
+#from views.view import View # línea nueva
+
+
 
 # ============================================================================
 # Gait controller wrapper
@@ -137,46 +141,61 @@ class PatrolSchedule:
 # Fire alarm
 # ============================================================================
 
-class FireMonitor:
-    """Detects nearby fires through the Darwin-op `receiver` device.
+class Monitor:
+    """Unifica la detección de fuego y personas en un solo Receiver."""
 
-    Each fire in the world is a Robot with an Emitter on channel 1 and a
-    limited range; while the robot stays inside that range the Receiver queue
-    is not empty and the alarm is raised (speech + red LED eyes).
-    """
-
-    ALARM_INTERVAL = 8.0   # minimum seconds between two spoken alarms
-    CLEAR_DELAY = 12.0     # seconds without signal before LEDs go back green
+    ALARM_INTERVAL = 8.0   # mínimo de segundos entre alarmas de fuego
+    CLEAR_DELAY = 12.0     # segundos sin señal de fuego antes de volver LEDs a verde
 
     def __init__(self, robot, time_step):
         self.receiver = robot.getDevice("receiver")
         if self.receiver is not None:
             self.receiver.enable(time_step)
+
         self.speaker = robot.getDevice("Speaker")
         self.eye = robot.getDevice("EyeLed")
         self.head = robot.getDevice("HeadLed")
+
         self.last_alarm = -self.ALARM_INTERVAL
-        self.last_signal = float("-inf")
+        self.last_fire_signal = float("-inf")
+        self.people_count = 0
+        self.last_people_count = -1
 
     def check(self, now):
         if self.receiver is None:
             return
-        near = self.receiver.getQueueLength() > 0
+
+        fire_detected = False
+        people_detected = 0
+
         while self.receiver.getQueueLength() > 0:
+            message = self.receiver.getString()
             self.receiver.nextPacket()
 
-        if near:
-            self.last_signal = now
+            if message == "FIRE":
+                fire_detected = True
+            elif message == "HUMAN":
+                people_detected += 1
+
+        # --- Fuego ---
+        if fire_detected:
+            self.last_fire_signal = now
             if now - self.last_alarm >= self.ALARM_INTERVAL:
                 self.last_alarm = now
-                self._raise_alarm()
-        elif now - self.last_signal >= self.CLEAR_DELAY:
+                self._raise_fire_alarm()
+        elif now - self.last_fire_signal >= self.CLEAR_DELAY:
             if self.eye is not None:
                 self.eye.set(0x00FF00)
             if self.head is not None:
                 self.head.set(0x00FF00)
 
-    def _raise_alarm(self):
+        # --- Personas ---
+        self.people_count = people_detected
+        if self.people_count != self.last_people_count:
+            print(f"[vision] personas vistas: {self.people_count}")
+            self.last_people_count = self.people_count
+
+    def _raise_fire_alarm(self):
         print("[alarm] fire detected near the robot")
         if self.speaker is not None:
             self.speaker.speak("Fire detected! Fire, fire!", 1.0)
@@ -184,6 +203,7 @@ class FireMonitor:
             self.eye.set(0xFF0000)
         if self.head is not None:
             self.head.set(0xFF0000)
+
 
 
 # ============================================================================
@@ -209,6 +229,8 @@ def main():
     # its `supervisor` field set (e.g. for verification/telemetry runs).
     robot = Supervisor()
     time_step = int(robot.getBasicTimeStep())
+
+    #vision = View(robot, time_step) # línea nueva
 
     gait = GaitController(robot, time_step)
 
@@ -236,12 +258,15 @@ def main():
     ])
     schedule.reset(robot.getTime())
 
-    fire_alarm = FireMonitor(robot, time_step)
+    alarm = Monitor(robot, time_step)
 
     gait.start()
 
     last_report = robot.getTime()
     while True:
+
+        #view_people(vision) # línea nueva
+
         now = robot.getTime()
         x, y, a, _ = schedule.update(now)
         gait.set_speed(x, y, a)
@@ -249,7 +274,7 @@ def main():
         if not gait.tick():
             return
 
-        fire_alarm.check(robot.getTime())
+        alarm.check(robot.getTime())
 
         if now - last_report >= 5.0:
             last_report = now

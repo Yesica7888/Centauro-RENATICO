@@ -18,8 +18,8 @@ DEF World WorldInfo {
   }
 }
 Viewpoint {
-  orientation -0.02320209136490134 -0.059869743541320616 0.9979365093855377 5.542471061867143
-  position -12.494296862731073 -3.8130614405788834 1.159730970471755
+  orientation -0.2255063996162643 0.1577459118586499 0.9613860260186814 1.9575346459194591
+  position 5.805977284369931 -56.853277272228034 5.811770390425194
   near 0.2
   followType "None"
 }
@@ -45,8 +45,90 @@ DEF FlightArea Floor {
   }
 }
 Darwin-op {
-  translation 0 -47 0.34
-  rotation 0 0 1 0
+  hidden position_0_0 8.218263280456903e-09
+  hidden position_0_1 7.288247843770775e-08
+  hidden position_0_2 1.725564838476225e-07
+  hidden position_0_3 0.9726708924089131
+  hidden position_0_4 -0.5939359348724509
+  hidden linearVelocity_0 0.1561869723484546 -0.06646515516160931 0.013908299096834562
+  hidden angularVelocity_0 0.17957180456612853 0.3858002357843404 -0.03679723638342438
+  hidden rotation_10 0.5774169327239824 0.5773169345359445 0.577316934535657 2.0944000047445406
+  hidden position_10_0 0.1899997455910319
+  hidden linearVelocity_10 0.2005452869669857 -0.0883810031949815 0.00021597254668754106
+  hidden angularVelocity_10 0.1795714564491409 0.38580021556047517 -0.036797357544094654
+  hidden rotation_11 1 0 0 0.5954002544089652
+  hidden linearVelocity_11 0.199938410321848 -0.08865189008945411 -0.005578222294470691
+  hidden angularVelocity_11 0.17957112029940453 0.38580018477187034 -0.03679743712743966
+  hidden rotation_15 0.5773565085124852 0.577347052714017 0.5773472462917884 2.0944147791125802
+  hidden position_15_0 -0.02264653634495535
+  hidden linearVelocity_15 0.13171451604289064 -0.05713106545816122 -0.007301940058097024
+  hidden angularVelocity_15 0.17956980838593425 0.3857979982990676 -0.03679676950131082
+  hidden rotation_16 0 0 1 0.02264653634496407
+  hidden position_16_0 0.7302755882301893
+  hidden linearVelocity_16 0.125752679431487 -0.05594760485667635 -0.0008019132928724743
+  hidden angularVelocity_16 0.20891408761974176 0.7686458369108002 0.05249498138670593
+  hidden rotation_17 -1 0 0 0.7302755882301896
+  hidden position_17_0 -1.0240745261373165
+  hidden linearVelocity_17 0.09514545459093117 0.002642806222551417 -0.03494180456296039
+  hidden angularVelocity_17 1.1100166280928743 0.7120594875100005 0.00022715690447054276
+  hidden rotation_18 1 0 0 1.0240745261373163
+  hidden position_18_0 -0.5226780576436492
+  hidden linearVelocity_18 0.032883700502240855 -0.0008771849016185078 -0.06106633626610287
+  hidden angularVelocity_18 -0.6559046945826438 0.8230997877992562 0.10510181351303371
+  hidden rotation_19 -1 0 0 0.5226780576436489
+  hidden position_19_0 -0.03425051012635881
+  hidden linearVelocity_19 0.014735548461528114 -0.02698585343714111 -0.07125005405529182
+  hidden angularVelocity_19 0.44090727652034073 0.7532218772947391 0.04126355471786554
+  hidden rotation_20 0 0 -1 0.03425051012635431
+  hidden linearVelocity_20 0.009543690392910356 -0.010366909053971193 -0.07695865797871451
+  hidden angularVelocity_20 0.3834257279640372 -0.16307217469288254 0.04413341020679727
+  hidden rotation_21 0.5773263446094526 0.5773622549443431 0.5773622072715452 2.094416687924365
+  hidden position_21_0 0.011298172748782476
+  hidden linearVelocity_21 0.13428316711848792 -0.05547976873664422 0.021869231908346394
+  hidden angularVelocity_21 0.17957169898189185 0.3858065105341321 -0.03679849234425237
+  hidden rotation_22 0 0 -1 0.011298172748779376
+  hidden position_22_0 -0.535650054775658
+  hidden linearVelocity_22 0.12877825607045304 -0.05433363294717105 0.028806642884436708
+  hidden angularVelocity_22 0.20616809270016884 0.734797506448351 0.04455929437749579
+  hidden rotation_23 -1 0 0 0.5356500547756582
+  hidden position_23_0 0.8608132184565005
+  hidden linearVelocity_23 0.09302411666087736 -0.0633558948528851 0.03141931935827552
+  hidden angularVelocity_23 -0.11163956019969774 0.752418047198932 0.07224215309431162
+  hidden rotation_24 1 0 0 0.8608132184565006
+  hidden position_24_0 0.5460895653808167
+  hidden linearVelocity_24 0.04060801353689356 0.004044154713227376 0.06914706432199777
+  hidden angularVelocity_24 1.432595423718927 0.6673247311915387 -0.06742617204128859
+  hidden rotation_25 -1 0 0 0.5460895653808165
+  hidden position_25_0 0.0015342070476280778
+  hidden linearVelocity_25 0.0320745967796639 0.04196912864122517 0.11225459866212834
+  hidden angularVelocity_25 0.3521622690237389 0.7267080204694079 0.031419081206567265
+  hidden rotation_26 0 0 1 0.0015342070476206488
+  hidden linearVelocity_26 0.02627268634888121 0.05408478212850679 0.10609970364337187
+  hidden angularVelocity_26 0.3031966136850535 -0.15183470562232773 0.024794430360586577
+  hidden rotation_27 0.6908804027193141 0.6908763855791918 0.21301194564491074 2.7219028268269914
+  hidden position_27_0 0.36000040466727684
+  hidden linearVelocity_27 0.17121482169415844 -0.06743405122441655 -0.024979279671833575
+  hidden angularVelocity_27 0.7691357078455356 0.35256412492316164 -0.08898778540549285
+  hidden rotation_28 0 0 0.9999999999999999 0.42539959533271837
+  hidden position_28_0 -0.5199997857585807
+  hidden linearVelocity_28 0.17354744856491733 -0.06697452440945065 -0.002645372540032089
+  hidden angularVelocity_28 0.7691365080247164 0.3525635261212159 -0.08898798476049742
+  hidden rotation_29 -0.9999999999999999 0 0 2.0907997857585787
+  hidden linearVelocity_29 0.15050739267413046 -0.019870493535048928 -0.014675266588369089
+  hidden angularVelocity_29 0.7691363329578182 0.3525635421947526 -0.08898799751506493
+  hidden rotation_30 0.6619394183302547 0.6619319731490536 0.35168490070460057 2.4651353822534894
+  hidden position_30_0 -0.33000081750559856
+  hidden linearVelocity_30 0.18318142590551234 -0.07584838022396798 0.04017270233722141
+  hidden angularVelocity_30 -0.40993814825989877 0.41989157870094507 0.015404909399264918
+  hidden rotation_31 0 0 -1 0.45539918249439715
+  hidden position_31_0 0.5099998205387949
+  hidden linearVelocity_31 0.16817826357411594 -0.09019199904524773 0.02624217288437644
+  hidden angularVelocity_31 -0.40993767414037363 0.41989217125584566 0.015404822113315753
+  hidden rotation_32 -0.9999999999999999 0 0 2.080799820538794
+  hidden linearVelocity_32 0.14763610265011487 -0.11091492412267821 0.0481614026722481
+  hidden angularVelocity_32 -0.40993797800305476 0.41989222027158574 0.015404803424551965
+  translation 2.5664833732495964 -47.46416123521747 0.41938844605700654
+  rotation 0.07494335124587326 0.1479331731214517 -0.986153776240935 1.651780282592005
   controller "darwin_patrol"
   channel 1
 }
@@ -80,55 +162,51 @@ DEF InitPos SquareManhole {
   size 1 1 0.05
 }
 DEF Fire1 Robot {
-  translation 4 -42 0.05
+  translation 4 -17.33 0.05
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 0.55 0.05
+        emissiveColor 1 0.25 0
+        emissiveIntensity 2.5
+      }
+      geometry Cylinder {
+        height 0.5
+        radius 0.12
+      }
+    }
+    Emitter {
+      range 8
+      channel 1
+    }
+  ]
   name "Fire1"
   controller "fire_beacon"
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 1 0.55 0.05
-        emissiveColor 1 0.25 0
-        emissiveIntensity 2.5
-      }
-      geometry Cylinder {
-        height 0.5
-        radius 0.12
-      }
-    }
-    Emitter {
-      name "emitter"
-      channel 1
-      range 8
-    }
-  ]
 }
 DEF Fire2 Robot {
-  translation -3.5 -32 0.05
+  translation -3.5 -18.7 0.05
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 0.55 0.05
+        emissiveColor 1 0.25 0
+        emissiveIntensity 2.5
+      }
+      geometry Cylinder {
+        height 0.5
+        radius 0.12
+      }
+    }
+    Emitter {
+      range 8
+      channel 1
+    }
+  ]
   name "Fire2"
   controller "fire_beacon"
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 1 0.55 0.05
-        emissiveColor 1 0.25 0
-        emissiveIntensity 2.5
-      }
-      geometry Cylinder {
-        height 0.5
-        radius 0.12
-      }
-    }
-    Emitter {
-      name "emitter"
-      channel 1
-      range 8
-    }
-  ]
 }
 DEF Fire3 Robot {
-  translation 7 -18 0.05
-  name "Fire3"
-  controller "fire_beacon"
+  translation 1.64 -8.88 0.05
   children [
     Shape {
       appearance PBRAppearance {
@@ -142,16 +220,15 @@ DEF Fire3 Robot {
       }
     }
     Emitter {
-      name "emitter"
-      channel 1
       range 8
+      channel 1
     }
   ]
+  name "Fire3"
+  controller "fire_beacon"
 }
 DEF Fire4 Robot {
   translation -9 4 0.05
-  name "Fire4"
-  controller "fire_beacon"
   children [
     Shape {
       appearance PBRAppearance {
@@ -165,11 +242,117 @@ DEF Fire4 Robot {
       }
     }
     Emitter {
-      name "emitter"
-      channel 1
       range 8
+      channel 1
     }
   ]
+  name "Fire4"
+  controller "fire_beacon"
+}
+DEF Human1 Robot {
+  translation 2 -45.09 0.05
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.96 0.80 0.69
+      }
+      geometry Cylinder {
+        height 1.7
+        radius 0.25
+      }
+    }
+    Emitter {
+      name "people_emitter"
+      range 8
+      channel 1
+    }
+  ]
+  name "Human1"
+  controller "human_beacon"
+}
+DEF Human2 Robot {
+  translation 4 -46 0.05
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.96 0.80 0.69
+      }
+      geometry Cylinder {
+        height 1.7
+        radius 0.25
+      }
+    }
+    Emitter {
+      name "people_emitter"
+      range 8
+      channel 1
+    }
+  ]
+  name "Human2"
+  controller "human_beacon"
+}
+DEF Human3 Robot {
+  translation -2 -48 0.05
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.96 0.80 0.69
+      }
+      geometry Cylinder {
+        height 1.7
+        radius 0.25
+      }
+    }
+    Emitter {
+      name "people_emitter"
+      range 8
+      channel 1
+    }
+  ]
+  name "Human3"
+  controller "human_beacon"
+}
+DEF Human4 Robot {
+  translation 0.57 -13.81 0.05
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.96 0.80 0.69
+      }
+      geometry Cylinder {
+        height 1.7
+        radius 0.25
+      }
+    }
+    Emitter {
+      name "people_emitter"
+      range 8
+      channel 1
+    }
+  ]
+  name "Human4"
+  controller "human_beacon"
+}
+DEF Human5 Robot {
+  translation -2.86 -18.83 0.05
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.96 0.80 0.69
+      }
+      geometry Cylinder {
+        height 1.7
+        radius 0.25
+      }
+    }
+    Emitter {
+      name "people_emitter"
+      range 8
+      channel 1
+    }
+  ]
+  name "Human5"
+  controller "human_beacon"
 }
 SmallResidentialTower {
   rotation 0 0 1 -1.5707953071795862
